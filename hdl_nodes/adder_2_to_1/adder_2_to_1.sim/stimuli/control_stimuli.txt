@@ -1,0 +1,13 @@
+# write_data [addr] [data] (write data to address range of user logic)
+# read_data [addr] (read data from address range of user logic, result only visible in waveform)
+#
+# write_config [addr] [data] (write data to address range of hdl_node)
+# read_config [addr] (read data from address range of hdl_node, result only visible in waveform)
+#
+# stream_in [stream_nr] [length] [filename] (set parameters for data stream in)
+# stream_out [stream_nr] [length] [filename (optional)] (set parameters for data stream out)
+#
+stream_in 0 2048 instream0.txt
+stream_in 1 2048 instream1.txt
+
+stream_out 0 2048 outstream0.txt

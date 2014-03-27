@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="backplane_simulator_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="backplane_simulator" />
+            <top_module name="hdl_node_package" />
+            <top_module name="hdl_node_user_params" />
+            <top_module name="tb_env_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="16" />
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/dab_clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">dab_clk</obj_property>
+      <obj_property name="ObjectShortName">dab_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/dab_rst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">dab_rst</obj_property>
+      <obj_property name="ObjectShortName">dab_rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/dab_addr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">dab_addr[15:0]</obj_property>
+      <obj_property name="ObjectShortName">dab_addr[15:0]</obj_property>
+      <obj_property name="WaveformStyle">STYLE_DIGITAL</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/dab_sel" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">dab_sel</obj_property>
+      <obj_property name="ObjectShortName">dab_sel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/dab_wvalid" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">dab_wvalid</obj_property>
+      <obj_property name="ObjectShortName">dab_wvalid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/dab_rvalid" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">dab_rvalid</obj_property>
+      <obj_property name="ObjectShortName">dab_rvalid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/dab_wdata" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">dab_wdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dab_wdata[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/dab_rdata" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">dab_rdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dab_rdata[31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tdata" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">cin_tdata[3:0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">cin_tdata[3:0][31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tdata[3]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[3][31:0]</obj_property>
+         <obj_property name="ObjectShortName">cin_tdata[3][31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tdata[2]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[2][31:0]</obj_property>
+         <obj_property name="ObjectShortName">cin_tdata[2][31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tdata[1]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[1][31:0]</obj_property>
+         <obj_property name="ObjectShortName">cin_tdata[1][31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tdata[0]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[0][31:0]</obj_property>
+         <obj_property name="ObjectShortName">cin_tdata[0][31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tvalid" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">cin_tvalid[3:0]</obj_property>
+      <obj_property name="ObjectShortName">cin_tvalid[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tready" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">cin_tready[3:0]</obj_property>
+      <obj_property name="ObjectShortName">cin_tready[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tlevel" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">cin_tlevel[3:0][11:0]</obj_property>
+      <obj_property name="ObjectShortName">cin_tlevel[3:0][11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tlevel[3]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[3][11:0]</obj_property>
+         <obj_property name="ObjectShortName">cin_tlevel[3][11:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tlevel[2]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[2][11:0]</obj_property>
+         <obj_property name="ObjectShortName">cin_tlevel[2][11:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tlevel[1]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[1][11:0]</obj_property>
+         <obj_property name="ObjectShortName">cin_tlevel[1][11:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cin_tlevel[0]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[0][11:0]</obj_property>
+         <obj_property name="ObjectShortName">cin_tlevel[0][11:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cout_tdata" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">cout_tdata[3:0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">cout_tdata[3:0][31:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cout_tdata[3]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[3][31:0]</obj_property>
+         <obj_property name="ObjectShortName">cout_tdata[3][31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cout_tdata[2]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[2][31:0]</obj_property>
+         <obj_property name="ObjectShortName">cout_tdata[2][31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cout_tdata[1]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[1][31:0]</obj_property>
+         <obj_property name="ObjectShortName">cout_tdata[1][31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cout_tdata[0]" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">[0][31:0]</obj_property>
+         <obj_property name="ObjectShortName">cout_tdata[0][31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cout_tvalid" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">cout_tvalid[3:0]</obj_property>
+      <obj_property name="ObjectShortName">cout_tvalid[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/cout_tready" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">cout_tready[3:0]</obj_property>
+      <obj_property name="ObjectShortName">cout_tready[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/backplane_simulator/hdl_node/dyplo_user_logic_i/data_storage" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">data_storage[0:1023][31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_storage[0:1023][31:0]</obj_property>
+   </wvobject>
+</wave_config>
