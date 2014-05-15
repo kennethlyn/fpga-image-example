@@ -12,7 +12,7 @@ fi
 
 if [ $1 -le 0 ]; then
 	# First call dyplo_example.tcl to generate Vivado project and the block design for the ZedBoard
-	vivado -mode tcl -source ./dyplo_example.tcl -tclargs ./ xc7z020clg484-1 em.avnet.com:zynq:zed:d ${DYPLO_DIR}/IP
+	vivado -mode tcl -source ./dyplo_example.tcl -tclargs ./ xc7z020clg484-1 em.avnet.com:zynq:zed:d ${DYPLO_DIR}/IP/${DYPLO_LICENSE_TYPE}
 fi
 
 if [ $1 -le 1 ]; then

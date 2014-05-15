@@ -39,9 +39,10 @@ use ieee.math_real.all;
 
 library dyplo_hdl_node_lib;
 use dyplo_hdl_node_lib.hdl_node_package.all;
-
-library dyplo_hdl_node_lib;
 use dyplo_hdl_node_lib.hdl_node_user_params.all;
+
+library user_logic;
+use user_logic.all;
 
 entity dyplo_hdl_node is
   port(

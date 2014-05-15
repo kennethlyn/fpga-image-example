@@ -45,18 +45,10 @@ use std.textio.all;
 
 library dyplo_hdl_node_lib;
 use dyplo_hdl_node_lib.hdl_node_package.all;
-
-library dyplo_hdl_node_lib;
 use dyplo_hdl_node_lib.hdl_node_user_params.all;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+library dyplo;
+use dyplo.all;
 
 entity backplane_simulator is
 end backplane_simulator;
