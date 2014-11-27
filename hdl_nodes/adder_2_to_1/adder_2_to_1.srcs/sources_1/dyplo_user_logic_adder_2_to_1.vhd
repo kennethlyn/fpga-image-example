@@ -1,6 +1,6 @@
 -- 	File: dyplo_user_logic_adder_2_to_1.vhd
 --	
---	© COPYRIGHT 2014 TOPIC EMBEDDED PRODUCTS B.V. ALL RIGHTS RESERVED.
+--	ï¿½ COPYRIGHT 2014 TOPIC EMBEDDED PRODUCTS B.V. ALL RIGHTS RESERVED.
 --	
 --	This file contains confidential and proprietary information of 
 --	Topic Embedded Products B.V. and is protected under Dutch and 
@@ -13,13 +13,13 @@
 --	license issued to you by Topic Embedded Products B.V., and to the maximum 
 --	extend permitted by applicable law:
 --
---	1.	Dyplo is furnished on an “as is”, as available basis. Topic makes no 
+--	1.	Dyplo is furnished on an ï¿½as isï¿½, as available basis. Topic makes no 
 --	warranty, express or implied, with respect to the capability of Dyplo. All 
 --	warranties of any type, express or implied, including the warranties of 
 --	merchantability, fitness for a particular purpose and non-infringement of 
 --	third party rights are expressly disclaimed.
 --	
---	2.	Topic’s maximum total liability shall be limited to general money 
+--	2.	Topicï¿½s maximum total liability shall be limited to general money 
 --	damages in an amount not to exceed the total amount paid for in the year 
 --	in which the damages have occurred.  Under no circumstances including 
 --	negligence shall Topic be liable for direct, indirect, incidental, special, 
@@ -38,14 +38,12 @@ use ieee.std_logic_unsigned.all;
 
 library dyplo_hdl_node_lib;
 use dyplo_hdl_node_lib.hdl_node_package.all;
-
-library dyplo_hdl_node_lib;
 use dyplo_hdl_node_lib.hdl_node_user_params.all;
 
 entity dyplo_user_logic_adder_2_to_1 is
   generic(
-    INPUT_QUEUES        : integer := 4;
-    OUTPUT_QUEUES       : integer := 4
+    INPUT_STREAMS        : integer := 4;
+    OUTPUT_STREAMS       : integer := 4
   );
   port(
     -- Processor bus interface
@@ -59,13 +57,13 @@ entity dyplo_user_logic_adder_2_to_1 is
     dab_rdata           : out std_logic_vector(c_hdl_dab_dwidth - 1 downto 0);
     -- Streaming input interfaces
     cin_tdata           : in cin_tdata_ul_type;
-    cin_tvalid          : in std_logic_vector(INPUT_QUEUES - 1 downto 0);
-    cin_tready          : out std_logic_vector(INPUT_QUEUES - 1 downto 0);
+    cin_tvalid          : in std_logic_vector(INPUT_STREAMS - 1 downto 0);
+    cin_tready          : out std_logic_vector(INPUT_STREAMS - 1 downto 0);
     cin_tlevel          : in cin_tlevel_ul_type;
     -- Streaming output interfaces
     cout_tdata          : out cout_tdata_ul_type;
-    cout_tvalid         : out std_logic_vector(OUTPUT_QUEUES - 1 downto 0);
-    cout_tready         : in std_logic_vector(OUTPUT_QUEUES - 1 downto 0);
+    cout_tvalid         : out std_logic_vector(OUTPUT_STREAMS - 1 downto 0);
+    cout_tready         : in std_logic_vector(OUTPUT_STREAMS - 1 downto 0);
     -- Clock signals
     user_clocks         : in std_logic_vector(3 downto 0)   
   );

@@ -1,6 +1,6 @@
 -- 	File: dyplo_hdl_node.vhd
 --	
---	© COPYRIGHT 2014 TOPIC EMBEDDED PRODUCTS B.V. ALL RIGHTS RESERVED.
+--	ï¿½ COPYRIGHT 2014 TOPIC EMBEDDED PRODUCTS B.V. ALL RIGHTS RESERVED.
 --	
 --	This file contains confidential and proprietary information of 
 --	Topic Embedded Products B.V. and is protected under Dutch and 
@@ -33,7 +33,6 @@
 
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
@@ -65,12 +64,13 @@ entity dyplo_hdl_node is
     -- Send data from FIFO to backplane
     f2b_tdata         : out std_logic_vector(c_hdl_backplane_bus_width - 1 downto 0);
     f2b_tstream_id    : out std_logic_vector(c_hdl_stream_id_width - 1 downto 0);
-    f2b_tnode_id      : out std_logic_vector(c_hdl_node_id_width - 1 downto 0);
     f2b_tvalid        : out std_logic;
     f2b_tready        : in std_logic;
     -- Serial fifo status info
     fifo_status_sync  : in std_logic;
-    fifo_status_flag  : out std_logic;  
+    fifo_status_flag  : out std_logic; 
+    -- fifo statuses of destination fifo's
+    dest_fifo_status	: in std_logic_vector(3 downto 0); 
     -- Clock signals
     user_clocks       : in std_logic_vector(3 downto 0)
   ); 
@@ -90,8 +90,8 @@ architecture rtl of dyplo_hdl_node is
 
   component dyplo_user_logic_adder_2_to_1 is
   generic(
-    INPUT_QUEUES        : integer := 4;
-    OUTPUT_QUEUES       : integer := 4
+    INPUT_STREAMS        : integer := 4;
+    OUTPUT_STREAMS       : integer := 4
   );
   port(
     -- Processor bus interface
@@ -105,13 +105,13 @@ architecture rtl of dyplo_hdl_node is
     dab_rdata           : out std_logic_vector(c_hdl_dab_dwidth - 1 downto 0);
     -- Streaming input interfaces
     cin_tdata           : in cin_tdata_ul_type;
-    cin_tvalid          : in std_logic_vector(INPUT_QUEUES - 1 downto 0);
-    cin_tready          : out std_logic_vector(INPUT_QUEUES - 1 downto 0);
+    cin_tvalid          : in std_logic_vector(INPUT_STREAMS - 1 downto 0);
+    cin_tready          : out std_logic_vector(INPUT_STREAMS - 1 downto 0);
     cin_tlevel          : in cin_tlevel_ul_type;
     -- Streaming output interfaces
     cout_tdata          : out cout_tdata_ul_type;
-    cout_tvalid         : out std_logic_vector(OUTPUT_QUEUES - 1 downto 0);
-    cout_tready         : in std_logic_vector(OUTPUT_QUEUES - 1 downto 0);
+    cout_tvalid         : out std_logic_vector(OUTPUT_STREAMS - 1 downto 0);
+    cout_tready         : in std_logic_vector(OUTPUT_STREAMS - 1 downto 0);
     -- Clock signals
     user_clocks         : in std_logic_vector(3 downto 0)   
   );     
@@ -156,10 +156,10 @@ begin
   -----------------------------------------------------------------------------
 
   dyplo_hdl_node_logic_i : dyplo_hdl_node_logic
-  generic map(
-    INPUT_QUEUES        => c_input_streams,
-    OUTPUT_QUEUES       => c_output_streams
-  )  
+  generic map (
+    INPUT_STREAMS        => c_input_streams,
+    OUTPUT_STREAMS       => c_output_streams  	
+  )
   port map(
     -- Miscellaneous
     node_id           =>  node_id,
@@ -180,12 +180,13 @@ begin
     -- Send data from FIFO to backplane
     f2b_tdata         =>  f2b_tdata,
     f2b_tstream_id    =>  f2b_tstream_id,
-    f2b_tnode_id      =>  f2b_tnode_id,
     f2b_tvalid        =>  f2b_tvalid,
     f2b_tready        =>  f2b_tready,
     -- Serial fifo status info
-    fifo_status_sync  =>  fifo_status_sync,
-    fifo_status_flag  =>  fifo_status_flag,  
+    fifo_status_sync  => fifo_status_sync,
+    fifo_status_flag  => fifo_status_flag,
+    -- fifo statuses of destination fifo's
+    dest_fifo_status	=> dest_fifo_status(c_output_streams - 1 downto 0),
     -- DAB interface to user logic
     dab_sel_ul        =>  dab_sel_ul,
     dab_wvalid_ul     =>  dab_wvalid_ul,
@@ -204,8 +205,8 @@ begin
   
   dyplo_user_logic_i : dyplo_user_logic_adder_2_to_1
   generic map(
-    INPUT_QUEUES        => c_input_streams,
-    OUTPUT_QUEUES       => c_output_streams
+    INPUT_STREAMS        => c_input_streams,
+    OUTPUT_STREAMS       => c_output_streams
   )
   port map(
     -- Processor bus interface

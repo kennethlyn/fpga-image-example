@@ -1,6 +1,6 @@
 -- 	File: backplane_simulator.vhd
 --	
---	© COPYRIGHT 2014 TOPIC EMBEDDED PRODUCTS B.V. ALL RIGHTS RESERVED.
+--	ï¿½ COPYRIGHT 2014 TOPIC EMBEDDED PRODUCTS B.V. ALL RIGHTS RESERVED.
 --	
 --	This file contains confidential and proprietary information of 
 --	Topic Embedded Products B.V. and is protected under Dutch and 
@@ -56,31 +56,32 @@ end backplane_simulator;
 architecture rtl of backplane_simulator is
 
   -- clock and reset for testbench
-  signal dab_clk          : std_logic := '0';
-  signal dab_rst          : std_logic := '1';
+  signal dab_clk            : std_logic := '0';
+  signal dab_rst            : std_logic := '1';
 
   --Internal signals for HDL node
-  signal dab_clk_i        : std_logic;
-  signal dab_rst_i        : std_logic;
-  signal dab_addr_i      : std_logic_vector(c_hdl_dab_awidth - 1 downto 0);
-  signal dab_sel_i       : std_logic;
-  signal dab_wvalid_i     : std_logic;
-  signal dab_rvalid_i     : std_logic;
-  signal dab_wdata_i      : std_logic_vector(c_hdl_dab_dwidth - 1 downto 0);
-  signal dab_rdata_i      : std_logic_vector(c_hdl_dab_dwidth - 1 downto 0);
+  signal dab_clk_i          : std_logic;
+  signal dab_rst_i          : std_logic;
+  signal dab_addr_i         : std_logic_vector(c_hdl_dab_awidth - 1 downto 0);
+  signal dab_sel_i          : std_logic;
+  signal dab_wvalid_i       : std_logic;
+  signal dab_rvalid_i       : std_logic;
+  signal dab_wdata_i        : std_logic_vector(c_hdl_dab_dwidth - 1 downto 0);
+  signal dab_rdata_i        : std_logic_vector(c_hdl_dab_dwidth - 1 downto 0);
   -- Receive data from backplane to FIFO
-  signal b2f_tdata_i      : std_logic_vector(c_hdl_backplane_bus_width - 1 downto 0);
-  signal b2f_tstream_id_i : std_logic_vector(c_hdl_stream_id_width - 1 downto 0);
-  signal b2f_tvalid_i     : std_logic;
-  signal b2f_tready_i     : std_logic;
+  signal b2f_tdata_i        : std_logic_vector(c_hdl_backplane_bus_width - 1 downto 0);
+  signal b2f_tstream_id_i   : std_logic_vector(c_hdl_stream_id_width - 1 downto 0);
+  signal b2f_tvalid_i       : std_logic;
+  signal b2f_tready_i       : std_logic;
   -- Send data from FIFO to backplane
-  signal f2b_tdata_i      : std_logic_vector(c_hdl_backplane_bus_width - 1 downto 0);
-  signal f2b_tstream_id_i : std_logic_vector(c_hdl_stream_id_width - 1 downto 0);
-  signal f2b_tnode_id_i   : std_logic_vector(c_hdl_node_id_width - 1 downto 0);
-  signal f2b_tvalid_i     : std_logic;
-  signal f2b_tready_i     : std_logic;
+  signal f2b_tdata_i        : std_logic_vector(c_hdl_backplane_bus_width - 1 downto 0);
+  signal f2b_tstream_id_i   : std_logic_vector(c_hdl_stream_id_width - 1 downto 0);
+  signal f2b_tvalid_i       : std_logic;
+  signal f2b_tready_i       : std_logic;
   -- Clock signals
-  signal user_clocks_i    : std_logic_vector(3 downto 0); 
+  signal dest_fifo_status_i : std_logic_vector(3 downto 0) := (others => '1'); 
+  -- Clock signals
+  signal user_clocks_i      : std_logic_vector(3 downto 0); 
   
   --internal signals for stim_reader
   signal cmd_i            : cmd_record;
@@ -88,7 +89,7 @@ architecture rtl of backplane_simulator is
   signal eof_i            : std_logic;
   
   --stream signals for datain stream processes
-  type streams_in_tdata_type is array (0 to c_input_streams - 1) of std_logic_vector(c_hdl_backplane_bus_width - 1 downto 0); 
+  type streams_in_tdata_type      is array (0 to c_input_streams - 1) of std_logic_vector(c_hdl_backplane_bus_width - 1 downto 0); 
   type streams_in_tstream_id_type is array (0 to c_input_streams - 1) of std_logic_vector(c_hdl_stream_id_width - 1 downto 0); 
   signal streams_in_tdata         : streams_in_tdata_type;
   signal streams_in_tstream_id    : streams_in_tstream_id_type;
@@ -103,7 +104,7 @@ architecture rtl of backplane_simulator is
   --data signal for storing stream parameters for each stream
   type data_in_streams_type is array (0 to c_input_streams - 1) of data_stream;
   signal data_in_streams          : data_in_streams_type;
-  type data_out_streams_type is array (0 to c_input_streams - 1) of data_stream;
+  type data_out_streams_type is array (0 to c_output_streams - 1) of data_stream;
   signal data_out_streams         : data_out_streams_type;    
  
   --type definition of type for state machine
@@ -117,41 +118,8 @@ architecture rtl of backplane_simulator is
   signal out_streams_enabled      : std_logic_vector(c_output_streams - 1 downto 0);
   signal out_streams_finished     : std_logic_vector(c_output_streams - 1 downto 0);
   
-  signal in_streams_enabled      : std_logic_vector(c_input_streams - 1 downto 0);
-  signal in_streams_finished     : std_logic_vector(c_input_streams - 1 downto 0);  
-
-  --component declaration HDL_node
-  component dyplo_hdl_node is
-  port(
-    -- Miscellaneous
-    node_id           : in std_logic_vector(c_hdl_node_id_width - 1 downto 0);
-    -- DAB interface
-    dab_clk             : in  std_logic;
-    dab_rst             : in  std_logic;
-    dab_addr            : in  std_logic_vector(c_hdl_dab_awidth - 1 downto 0);
-    dab_sel             : in  std_logic;
-    dab_wvalid          : in  std_logic;
-    dab_rvalid          : in  std_logic;
-    dab_wdata           : in  std_logic_vector(c_hdl_dab_dwidth - 1 downto 0);
-    dab_rdata           : out std_logic_vector(c_hdl_dab_dwidth - 1 downto 0);
-    -- Receive data from backplane to FIFO
-    b2f_tdata           : in std_logic_vector(c_hdl_backplane_bus_width - 1 downto 0);
-    b2f_tstream_id      : in std_logic_vector(c_hdl_stream_id_width - 1 downto 0);
-    b2f_tvalid          : in std_logic;
-    b2f_tready          : out std_logic;   
-    -- Send data from FIFO to backplane
-    f2b_tdata           : out std_logic_vector(c_hdl_backplane_bus_width - 1 downto 0);
-    f2b_tstream_id      : out std_logic_vector(c_hdl_stream_id_width - 1 downto 0);
-    f2b_tnode_id        : out std_logic_vector(c_hdl_node_id_width - 1 downto 0);
-    f2b_tvalid          : out std_logic;
-    f2b_tready          : in std_logic;
-    -- Serial fifo status info
-    fifo_status_sync    : in std_logic;
-    fifo_status_flag    : out std_logic;  
-    -- Clock signals
-    user_clocks         : in std_logic_vector(3 downto 0)
-  );
-  end component;
+  signal in_streams_enabled       : std_logic_vector(c_input_streams - 1 downto 0);
+  signal in_streams_finished      : std_logic_vector(c_input_streams - 1 downto 0);  
   
   --component declaration stim_reader
   component tb_stim_reader is
@@ -164,6 +132,40 @@ architecture rtl of backplane_simulator is
     eof             : out   std_logic
   );
   end component;      
+  
+  --component declaration HDL_node
+  component dyplo_hdl_node is
+  port(
+    -- Miscellaneous
+    node_id           : in std_logic_vector(c_hdl_node_id_width - 1 downto 0);
+    -- DAB interface
+    dab_clk           : in std_logic;
+    dab_rst           : in std_logic;
+    dab_addr          : in std_logic_vector(c_hdl_dab_awidth - 1 downto 0);
+    dab_sel           : in std_logic;
+    dab_wvalid        : in std_logic;
+    dab_rvalid        : in std_logic;
+    dab_wdata         : in std_logic_vector(c_hdl_dab_dwidth - 1 downto 0);
+    dab_rdata         : out std_logic_vector(c_hdl_dab_dwidth - 1 downto 0);
+    -- Receive data from backplane to FIFO
+    b2f_tdata         : in std_logic_vector(c_hdl_backplane_bus_width - 1 downto 0);
+    b2f_tstream_id    : in std_logic_vector(c_hdl_stream_id_width - 1 downto 0);
+    b2f_tvalid        : in std_logic;
+    b2f_tready        : out std_logic;   
+    -- Send data from FIFO to backplane
+    f2b_tdata         : out std_logic_vector(c_hdl_backplane_bus_width - 1 downto 0);
+    f2b_tstream_id    : out std_logic_vector(c_hdl_stream_id_width - 1 downto 0);
+    f2b_tvalid        : out std_logic;
+    f2b_tready        : in std_logic;
+    -- Serial fifo status info
+    fifo_status_sync  : in std_logic;
+    fifo_status_flag  : out std_logic; 
+    -- fifo statuses of destination fifo's
+    dest_fifo_status  : in std_logic_vector(3 downto 0); 
+    -- Clock signals
+    user_clocks       : in std_logic_vector(3 downto 0)
+  );
+  end component;  
 
 begin
 
@@ -188,12 +190,13 @@ begin
     -- Send data from FIFO to backplane
     f2b_tdata         => f2b_tdata_i,
     f2b_tstream_id    => f2b_tstream_id_i,
-    f2b_tnode_id      => f2b_tnode_id_i,
     f2b_tvalid        => f2b_tvalid_i,
     f2b_tready        => f2b_tready_i,
     -- Serial fifo status info
     fifo_status_sync  => '0',
     fifo_status_flag  => open,     
+    -- fifo statuses of destination fifo's
+    dest_fifo_status  => dest_fifo_status_i,  
     -- Clock signals  
     user_clocks       => user_clocks_i
   );
@@ -514,7 +517,7 @@ begin
           sm_stream                 <= START_BURST;
         else
       
-          streams_in_tstream_id(i)   <= std_logic_vector(to_unsigned(i,5));
+          streams_in_tstream_id(i)   <= std_logic_vector(to_unsigned(i,c_hdl_stream_id_width));
           
           if(data_in_streams(i).enable = '1' and words_send < data_in_streams(i).length) then
               
@@ -587,10 +590,10 @@ begin
     end process;
   end generate;
     
-  b2f_tdata_i                             <= streams_in_tdata(schedule_in_streams);
-  b2f_tstream_id_i                        <= streams_in_tstream_id(schedule_in_streams);
-  b2f_tvalid_i                            <= streams_in_tvalid(schedule_in_streams);
-  streams_in_tready                       <= (schedule_in_streams => b2f_tready_i, others => '0');
+  b2f_tdata_i         <= streams_in_tdata(schedule_in_streams);
+  b2f_tstream_id_i    <= streams_in_tstream_id(schedule_in_streams);
+  b2f_tvalid_i        <= streams_in_tvalid(schedule_in_streams);
+  streams_in_tready   <= (schedule_in_streams => b2f_tready_i, others => '0');
     
   -- Data in streams
   data_streams_out : for i in 0 to c_output_streams - 1 generate

@@ -3,11 +3,11 @@
 <!--                                                         -->
 <!-- Copyright (c) 2001-2013 Xilinx Inc, All rights reserved -->
 
-<Project Version="7" Minor="0" Path="C:/workspace/fpga-image-example/hdl_nodes/subtractor/subtractor.xpr">
+<Project Version="7" Minor="0" Path="/home/niek/workspace/fpga-image-example/hdl_nodes/subtractor/subtractor.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="b3ec5056c90f40808620bd9911bbc64f"/>
-    <Option Name="Part" Val="xc7z020clg484-1"/>
+    <Option Name="Id" Val="540b260c9c9844db9a63f71190714ae5"/>
+    <Option Name="Part" Val="xc7z015clg485-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="TargetLanguage" Val="VHDL"/>
     <Option Name="BoardPart" Val=""/>
@@ -21,17 +21,8 @@
       <File Path="$PSRCDIR/sources_1/dyplo_hdl_node_user_params.vhd">
         <FileInfo>
           <Attr Name="Library" Val="dyplo_hdl_node_lib"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../dyplo-ip/hdl_node_template/hdl_node_template.srcs/sources_1/dyplo_hdl_node_user_params.vhd"/>
-          <Attr Name="ImportTime" Val="1395130956"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/dyplo_priority_decoder.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="dyplo_hdl_node_lib"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../dyplo-ip/hdl_node_template/hdl_node_template.srcs/sources_1/dyplo_priority_decoder.vhd"/>
-          <Attr Name="ImportTime" Val="1392030298"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../dyplo/hdl_node_template.srcs/sources_1/dyplo_hdl_node_user_params.vhd"/>
+          <Attr Name="ImportTime" Val="1415809237"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -39,8 +30,8 @@
       <File Path="$PSRCDIR/sources_1/dyplo_hdl_node_package.vhd">
         <FileInfo>
           <Attr Name="Library" Val="dyplo_hdl_node_lib"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../dyplo-ip/hdl_node_template/hdl_node_template.srcs/sources_1/dyplo_hdl_node_package.vhd"/>
-          <Attr Name="ImportTime" Val="1395130658"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../dyplo/hdl_node_template.srcs/sources_1/dyplo_hdl_node_package.vhd"/>
+          <Attr Name="ImportTime" Val="1415809237"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -48,24 +39,8 @@
       <File Path="$PSRCDIR/sources_1/dyplo_fifo.vhd">
         <FileInfo>
           <Attr Name="Library" Val="dyplo_hdl_node_lib"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../dyplo-ip/hdl_nodes/adder_2_to_1/adder_2_to_1.srcs/sources_1/dyplo_fifo.vhd"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../hdl_nodes/adder_2_to_1/adder_2_to_1.srcs/sources_1/dyplo_fifo.vhd"/>
           <Attr Name="ImportTime" Val="1380620275"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/dyplo_user_logic_subtractor.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="user_logic"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/dyplo_hdl_node_logic.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="dyplo_hdl_node_lib"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../dyplo-ip/hdl_node_template/hdl_node_template.srcs/sources_1/dyplo_hdl_node_logic.vhd"/>
-          <Attr Name="ImportTime" Val="1395130531"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -73,8 +48,33 @@
       <File Path="$PSRCDIR/sources_1/dyplo_hdl_node.vhd">
         <FileInfo>
           <Attr Name="Library" Val="dyplo"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../dyplo-ip/hdl_nodes/adder_2_to_1/adder_2_to_1.srcs/sources_1/dyplo_hdl_node.vhd"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../hdl_nodes/adder_2_to_1/adder_2_to_1.srcs/sources_1/dyplo_hdl_node.vhd"/>
           <Attr Name="ImportTime" Val="1382958734"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/dyplo_priority_decoder.vhd">
+        <FileInfo>
+          <Attr Name="Library" Val="dyplo_hdl_node_lib"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../dyplo/hdl_node_template.srcs/sources_1/dyplo_priority_decoder.vhd"/>
+          <Attr Name="ImportTime" Val="1415809237"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/dyplo_hdl_node_logic.vhd">
+        <FileInfo>
+          <Attr Name="Library" Val="dyplo_hdl_node_lib"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../dyplo/hdl_node_template.srcs/sources_1/dyplo_hdl_node_logic.vhd"/>
+          <Attr Name="ImportTime" Val="1415809237"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/dyplo_user_logic_subtractor.vhd">
+        <FileInfo>
+          <Attr Name="Library" Val="dyplo_hdl_node_lib"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -95,7 +95,7 @@
       <File Path="$PSRCDIR/sim_1/tb_env_pkg.m.vhd">
         <FileInfo>
           <Attr Name="Library" Val="tb_lib"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../dyplo-ip/hdl_nodes/adder_2_to_1/adder_2_to_1.srcs/sim_1/tb_env_pkg.m.vhd"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../hdl_nodes/adder_2_to_1/adder_2_to_1.srcs/sim_1/tb_env_pkg.m.vhd"/>
           <Attr Name="ImportTime" Val="1380715185"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -104,7 +104,7 @@
       <File Path="$PSRCDIR/sim_1/tb_stim_reader.vhd">
         <FileInfo>
           <Attr Name="Library" Val="tb_lib"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../dyplo-ip/hdl_nodes/adder_2_to_1/adder_2_to_1.srcs/sim_1/tb_stim_reader.vhd"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../hdl_nodes/adder_2_to_1/adder_2_to_1.srcs/sim_1/tb_stim_reader.vhd"/>
           <Attr Name="ImportTime" Val="1382013145"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -112,8 +112,8 @@
       </File>
       <File Path="$PSRCDIR/sim_1/backplane_simulator.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../../dyplo-ip/hdl_node_template/hdl_node_template.srcs/sim_1/backplane_simulator.vhd"/>
-          <Attr Name="ImportTime" Val="1392034694"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../dyplo/hdl_node_template.srcs/sim_1/backplane_simulator.vhd"/>
+          <Attr Name="ImportTime" Val="1416390817"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -129,13 +129,13 @@
     </FileSet>
   </FileSets>
   <Runs Version="1" Minor="9">
-    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7z020clg484-1" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current">
+    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7z015clg485-1" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2014"/>
         <Step Id="synth_design"/>
       </Strategy>
     </Run>
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg484-1" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" SynthRun="synth_1">
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7z015clg485-1" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" SynthRun="synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2014"/>
         <Step Id="init_design"/>
