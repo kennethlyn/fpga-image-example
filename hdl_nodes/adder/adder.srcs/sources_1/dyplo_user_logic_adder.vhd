@@ -34,7 +34,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-use ieee.std_logic_signed.all;
 
 library dyplo_hdl_node_lib;
 use dyplo_hdl_node_lib.hdl_node_package.all;
@@ -72,8 +71,9 @@ end dyplo_user_logic_adder;
 architecture rtl of dyplo_user_logic_adder is
   type signed_matrix_4x32 is array (0 to INPUT_STREAMS - 1) of signed(31 downto 0);
   signal value_to_add     : signed_matrix_4x32;
-  signal cin_tdata_i      : signed_matrix_4x32;
-  signal cout_tdata_i     : signed_matrix_4x32;
+  signal cout_tdata_i     : signed_matrix_4x32 := (others => (others => '0'));
+  signal cout_tvalid_i    : std_logic_vector(OUTPUT_STREAMS - 1 downto 0) := (others => '0');
+  signal cin_tready_i     : std_logic_vector(INPUT_STREAMS - 1 downto 0) := (others => '0');
 begin
 
   config_reg : process (dab_clk)
@@ -93,40 +93,36 @@ begin
   end process config_reg;
     
   adders : for i in 0 to 3 generate
-  
-      type sm_calc_states is (S_FETCH, S_CALC, S_SEND, S_FINISH);
-      signal sm_calc : sm_calc_states;
-      signal tdata   : signed(31 downto 0);
-  
+    type sm_calc_states is (S_FETCH, S_CALC, S_SEND, S_FINISH);
+    signal sm_calc : sm_calc_states := S_FETCH;
+    signal tdata   : signed(31 downto 0) := (others => '0');
   begin    
 
     calc_data : process (dab_clk)
     begin
       if rising_edge(dab_clk) then
         if (dab_rst = '1') then
-          cout_tdata_i(i)   <= (others => '0');
-          cout_tvalid(i)    <= '0';
-          cin_tready(i)     <= '0';
-          sm_calc           <= S_FETCH;
-          tdata             <= (others => '0');
+          cin_tready_i(i)     <= '0';
+          tdata               <= (others => '0');
+          sm_calc             <= S_FETCH;
+          cout_tvalid_i(i)    <= '0';
         else
           case sm_calc is
             when S_FETCH =>
-              if (cin_tvalid(i) = '1') and (conv_integer(cin_tlevel(i)) /= 0) then
-                cin_tready(i)  <= '1';
-                tdata <= to_signed(conv_integer(cin_tdata(i)),32);
+              if (cin_tvalid(i) = '1') then
+                cin_tready_i(i)  <= '1';
+                tdata <= signed(cin_tdata(i));
                 sm_calc <= S_CALC;
               end if;
             when S_CALC =>
-              cin_tready(i)  <= '0';
-              cout_tdata_i(i) <= tdata + value_to_add(i);
-              cout_tvalid(i) <= '1';
-              
-              sm_calc <= S_SEND;
+              cin_tready_i(i)   <= '0';
+              cout_tdata_i(i)   <= tdata + value_to_add(i);
+              cout_tvalid_i(i)  <= '1';
+              sm_calc           <= S_SEND;
             when S_SEND =>
               if (cout_tready(i) = '1') then
-                cout_tvalid(i) <= '0';
-                sm_calc <= S_FINISH;
+                cout_tvalid_i(i) <= '0';
+                sm_calc          <= S_FINISH;
               end if;
             when S_FINISH =>
               sm_calc <= S_FETCH;
@@ -137,8 +133,11 @@ begin
     
   end generate adders;
   
-  cout_tdata(0)    <= std_logic_vector(cout_tdata_i(0));
-  cout_tdata(1)    <= std_logic_vector(cout_tdata_i(1));
-  cout_tdata(2)    <= std_logic_vector(cout_tdata_i(2));
-  cout_tdata(3)    <= std_logic_vector(cout_tdata_i(3));
+  cout_tvalid     <= cout_tvalid_i;
+  cin_tready      <= cin_tready_i;
+  cout_tdata(0)   <= std_logic_vector(cout_tdata_i(0));
+  cout_tdata(1)   <= std_logic_vector(cout_tdata_i(1));
+  cout_tdata(2)   <= std_logic_vector(cout_tdata_i(2));
+  cout_tdata(3)   <= std_logic_vector(cout_tdata_i(3));
+  
 end rtl;
